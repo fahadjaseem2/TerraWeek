@@ -1,11 +1,21 @@
 locals {
-  name_prefix = upper("terraweek-${var.environment}")
+  name_prefix = join("-", [
+    "tws",
+    "terraweek",
+    "var.environment"
+  ])
 
-  comman_tags = {
-    project     = "Terraweek"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  comman_tags = merge(
+    {
+      project = "Terraweek"
+    },
+    {
+      Environment = var.environment
+      ManagedBy   = "Terraform"
+    }
+  )
+
+  project_name = upper("terraweek")
 }
 
 /*
